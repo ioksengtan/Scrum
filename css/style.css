@@ -1,0 +1,106 @@
+ body {
+ 	font-family:helvetica, arial;
+	 font-size:12px
+  }
+.scrumboard{
+	position:relative;
+	
+	margin-left:12%;
+	width:100%;
+	
+}
+#ProjectTitle{
+		font-size:30px;
+		text-align:left;
+		font-weight: bold;
+		margin-top:5px;
+		margin-bottom:10px;
+		margin-left:10px;
+}
+#edit_div{
+  position:fixed;
+  z-index:5;
+  width:30%;
+  height:60%;
+  right:5px;
+  top:40%;
+  background-color: rgba(200, 200, 200, 0.8);
+  font-size:20px;
+
+}
+
+#edit_div_close{
+  position:relative;
+  text-align:right;
+  padding-right:5px;
+  font-size:20px;
+}
+
+#edit_div_content{
+  padding-left:5px;
+
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+	font-size:20px;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+h1{
+	margin-left:20px;
+	font-size:2rem;
+}
+  .column {
+    width: 18%;
+    float: left;
+	border: solid 0px black;
+	height:1000px;
+	margin-right:20px;
+	
+  }
+  .portlet {
+    margin: 0 1em 1em 0;
+    padding: 0.3em;
+  }
+  .portlet-header {
+    padding: 0.2em 0.3em;
+    margin-bottom: 0.5em;
+    position: relative;
+  }
+  .portlet-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -8px;
+  }
+  .portlet-content {
+    padding: 0.4em;
+  }
+  .portlet-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+  }
