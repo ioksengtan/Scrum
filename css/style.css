@@ -4,13 +4,13 @@
   }
 .scrumboard{
 	position:relative;
-	
+
 	margin-left:12%;
 	width:100%;
-	
+
 }
 #ProjectTitle{
-		font-size:30px;
+		font-size:20px;
 		text-align:left;
 		font-weight: bold;
 		margin-top:5px;
@@ -26,6 +26,7 @@
   top:40%;
   background-color: rgba(200, 200, 200, 0.8);
   font-size:20px;
+  display:none;
 
 }
 
@@ -40,11 +41,50 @@
   padding-left:5px;
 
 }
+#div_history{
+
+  display:none;
+}
+#div_authen{
+  z-index:3;
+  background-color: rgba(220, 200, 200, 0.8);;
+  position:fixed;
+  width:50%;
+  height:50%;
+  left:25%;
+  top:25%;
+  font-size:20px;
+  padding: 20px 20px 20px 20px;
+}
+.single-line{
+  margin-bottom:20px;
+  border-style:solid;
+  border-width:2px;
+  font-size:20px;
+}
+
+#div_authen_send{
+  border-style:solid;
+  border-size:2px;
+  width:80px;
+  text-align:center;
+  margin-bottom:5px;
+
+}
+#div_authen_send:hover{
+  background-color: gray;
+  cursor:pointer;
+
+}
+.password{
+  
+}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 10%;
+    width: 12%;
     background-color: #f1f1f1;
     position: fixed;
     height: 100%;
@@ -79,7 +119,7 @@ h1{
 	border: solid 0px black;
 	height:1000px;
 	margin-right:20px;
-	
+
   }
   .portlet {
     margin: 0 1em 1em 0;
