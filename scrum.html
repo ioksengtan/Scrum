@@ -14,6 +14,7 @@
 </head>
 
 <body>
+<div id="div_navbar">
 <ul>
   <li id="ProjectTitle">[ProjectTitle]</li>
   <li><a href="index.html">Home</a></li>
@@ -22,25 +23,27 @@
   <li><a href="">Contact</a></li>
   <li><a href="">About</a></li>
 </ul>
+</div>
+
 <div id="edit_div">
-<div id="edit_div_close">
-		<a href="javascript: DeleteTask();$('#edit_div').hide();">Delete</a>
-		<a href="javascript: $('#edit_div').hide();">Close</a>
-		<a href="javascript: SaveTask();$('#edit_div').hide();">Save&amp;Close</a>
-</div>
+	<div id="edit_div_close">
+			<a href="javascript: DeleteTask();$('#edit_div').hide();">Delete</a>
+			<a href="javascript: $('#edit_div').hide();">Close</a>
+			<a href="javascript: SaveTask();$('#edit_div').hide();">Save&amp;Close</a>
+	</div>
 
 
-<div id="edit_div_content">
-	<div>Task Name:
-			<div contenteditable="true" class="single-line" id="edit_div_content_title"></div>
+	<div id="edit_div_content">
+		<div>Task Name:
+				<div contenteditable="true" class="single-line" id="edit_div_content_title"></div>
+		</div>
+		<div>Task Description:
+				<div contenteditable="true" class="single-line" id="edit_div_content_content"></div>
+		</div>
+		<div>priority:
+				<div contenteditable="true" class="single-line" id="edit_div_content_priority"></div>
+		</div>
 	</div>
-	<div>Task Description:
-			<div contenteditable="true" class="single-line" id="edit_div_content_content"></div>
-	</div>
-	<div>priority:
-			<div contenteditable="true" class="single-line" id="edit_div_content_priority"></div>
-	</div>
-</div>
 </div>
 
 <div id="div_authen">
@@ -92,7 +95,7 @@
   <script src='js/jquery.min.js'></script>
 <script src='js/jquery-ui.min.js'></script>
 
-    <script  src="js/index.js"></script>
+    <script  src="js/scrum.js"></script>
 
 </body>
 </html>

@@ -1,13 +1,75 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
+	
 	    <script src="js/jquery.min.js"></script>
-
+		<link rel="stylesheet" href="css/index.css">
+		<script  src="js/index.js"></script>
 	</head>
 		<body>
-		<ul>
-			<li><a href="scrum.html?ProjectID=1&amp;ProjectName=ANSYS&amp;Public=false">ANSYS</a></li>
-		  <li><a href="scrum.html?ProjectID=2&amp;ProjectName=MapsNetwork&amp;Public=true">MapsNetwork</a></li>
-		</ul>
+
+		
+		
+		<div id="div_navbar">
+			<ul>
+			  <li id="ProjectTitle">Scrum Ur Proj.</li>
+			  <li><a href="index.html">Home</a></li>
+			  <li><a href="javascript:ToAddProject()">New Project</a></li>
+			  <li><a href="">Contact</a></li>
+			  <li><a href="">About</a></li>
+			</ul>
+		</div>
+		
+		
+		<div id="edit_div">
+			<div id="edit_div_close">
+					<a href="javascript: DeleteProject();$('#edit_div').hide();">Delete</a>
+					<a href="javascript: $('#edit_div').hide();">Close</a>
+					<a href="javascript: SaveProject();$('#edit_div').hide();">Save&amp;Close</a>
+			</div>
+
+
+			<div id="edit_div_content">
+				<div>Project Name:
+						<div contenteditable="true" class="single-line" id="edit_div_content_title"></div>
+				</div>
+				<div>Project Description:
+						<div contenteditable="true" class="single-line" id="edit_div_content_content"></div>
+				</div>
+				<div>Project Authenticate:
+						<div contenteditable="true" class="single-line" id="edit_div_content_authen"></div>
+				</div>
+			
+			</div>
+		</div>
+		
+		<div class="wrapper">
+  
+  <div class="table">
+    
+    <div class="row header gray">
+      <div class="cell">
+        Project
+      </div>
+	<div class="cell">
+        Description
+      </div>
+      <div class="cell">
+        Authen
+      </div>
+   <div class="cell">
+        Operation
+      </div>
+    </div>
+    
+    
+    
+
+    
+  </div>
+  
+</div>
+		
 		</body>
 </html>
