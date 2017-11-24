@@ -41,6 +41,9 @@
   padding-left:5px;
 
 }
+#portlet-tag{
+	font-weight: bold;
+}
 #div_history{
 
   display:none;

@@ -73,15 +73,15 @@ $(function() {
    			appProjects,{
 				"command":"commandGetProjects"
    			},function (data) {
-				//console.log(data);
-				var project_set_tmp = data.split('|');
+				console.log(data);
+				var project_set_tmp = data.split('||');
 				project_set_tmp.pop();
 				for(var iproject=0;iproject<project_set_tmp.length;iproject++){
 					var project_tmp = project_set_tmp[iproject];
-					var ProjectID = project_tmp.split(',')[0];
-					var ProjectName = project_tmp.split(',')[1];
-					var ProjectDescription = project_tmp.split(',')[2];
-					var ProjectAuthen = project_tmp.split(',')[3];
+					var ProjectID = project_tmp.split('$$')[0];
+					var ProjectName = project_tmp.split('$$')[1];
+					var ProjectDescription = project_tmp.split('$$')[2];
+					var ProjectAuthen = project_tmp.split('$$')[3];
 					projects_set[ProjectID] = {
 						"ProjectName":ProjectName,
 						"ProjectDescription":ProjectDescription,
