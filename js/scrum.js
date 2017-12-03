@@ -52,7 +52,7 @@
 						  "TaskDescription":$('#edit_div_content_content').text(),
 						  "Tag":$('#edit_div_content_tag').text(),
 						  "priority":$('#edit_div_content_priority').text()
-						  
+
 					}
 					$('#div_task_id_'+data).click(
 						  {param:data},
@@ -94,7 +94,7 @@
 					  "StateID":tasks_set[task_id_to_edit].StateID,
 					  "ProjectID":ProjectID,
 					  "Tag":tasks_set[task_id_to_edit].Tag,
-            "TaskOwnerIndex":curr_key
+            "TaskOwnerIndex":"Tasks"
 				},function (data) {
 
 				}
@@ -191,7 +191,7 @@
 			);
 
 
-		}										
+		}
        });
 
        $( ".portlet" )
@@ -217,7 +217,8 @@
    		appScrum,{
    			"command":"commandGetTasks",
    			"ProjectID":ProjectID,
-			"TaskOwnerIndex":private_key_input
+			"TaskOwnerIndex":"Tasks",
+      "Encrypt":private_key_input
    		},function (data) {
    			console.log(data);
    			var tasks_set_tmp = data.split('||');
@@ -249,7 +250,7 @@
    						$('#div_task_id_'+TaskID).click(
    						{param:TaskID},
    							function(e){
-								
+
    								task_id_to_edit = e.data.param;
    								$('#edit_div_content_title').text(tasks_set[e.data.param].TaskName);
    								$('#edit_div_content_content').text(tasks_set[e.data.param].TaskDescription);
