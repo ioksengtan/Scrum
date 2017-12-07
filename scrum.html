@@ -24,16 +24,13 @@
   <li><a href="">About</a></li>
 </ul>
 </div>
-
+<!--
 <div id="edit_div">
-	<div id="edit_div_close">
-			<a href="javascript: DeleteTask();$('#edit_div').hide();">Delete</a>
-			<a href="javascript: $('#edit_div').hide();">Close</a>
-			<a href="javascript: SaveTask();$('#edit_div').hide();">Save&amp;Close</a>
-	</div>
+
 
 
 	<div id="edit_div_content">
+		
 		<div>Task Name:
 				<div contenteditable="true" class="single-line" id="edit_div_content_title"></div>
 		</div>
@@ -46,7 +43,38 @@
 		<div>priority:
 				<div contenteditable="true" class="single-line" id="edit_div_content_priority"></div>
 		</div>
+		
 	</div>
+</div>
+-->
+<div id="form-main">
+
+  <div id="edit_div">
+  	<div id="edit_div_close">
+			<a href="javascript: DeleteTask();$('#edit_div').hide();">Delete</a>
+			<a href="javascript: $('#edit_div').hide();">Close</a>
+			<a href="javascript: SaveTask();$('#edit_div').hide();">Save&amp;Close</a>
+	</div>
+    <form class="form" id="form1">
+      
+      <p class="name">
+        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Task Name" id="edit_div_content_title" />
+      </p>
+      
+      <p class="tag">
+        <input name="tag" type="text" class="validate[required,custom[priority]] feedback-input" id="edit_div_content_tag" placeholder="tag" />
+      </p>
+      
+      <p class="text">
+        <textarea name="text" class="validate[required,length[6,300]] feedback-input" id="edit_div_content_content" placeholder="Task Description"></textarea>
+      </p>
+      <p class="priority">
+        <input name="priority" type="text" class="validate[required,custom[priority]] feedback-input" id="edit_div_content_priority" placeholder="priority" />
+      </p>      
+      
+
+    </form>
+  </div>
 </div>
 
 <div id="div_authen">

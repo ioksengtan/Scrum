@@ -9,6 +9,16 @@
  var task_id_to_edit;
  tasks_set = {};
  var curr_key;
+ 
+ var p2div = function(paragraph){
+	var div_content="";
+	var p_set = paragraph.split('\n');
+	for (i in p_set){
+		div_content+=p_set[i];
+		div_content+="</br>";
+	}
+	return div_content;
+ }
 
  var ShowHistory = function(){
 	 if(history_en){
@@ -20,10 +30,10 @@
 	 }
  }
  var ToAddTask = function(){
-	$('#edit_div_content_title').text("");
-	$('#edit_div_content_content').text("");
-	$('#edit_div_content_tag').text("");
-	$('#edit_div_content_priority').text("");
+	$('#edit_div_content_title').val("");
+	$('#edit_div_content_content').val("");
+	$('#edit_div_content_tag').val("");
+	$('#edit_div_content_priority').val("");
 
 	 $('#edit_div').show();
 	 $('#edit_div').attr('add_or_edit','add');
@@ -37,31 +47,32 @@
 			$.get(
 				appScrum,{
 					  "command":"commandAddTask",
-					  "TaskName":$('#edit_div_content_title').text(),
-					  "TaskDescription":$('#edit_div_content_content').text(),
-					  "Priority":$('#edit_div_content_priority').text(),
-					  "Tag":$('#edit_div_content_tag').text(),
+					  "TaskName":$('#edit_div_content_title').val(),
+					  "TaskDescription":$('#edit_div_content_content').val(),
+					  "Priority":$('#edit_div_content_priority').val(),
+					  "Tag":$('#edit_div_content_tag').val(),
 					  "StateID":1,
 					  "ProjectID":ProjectID,
-					  "TaskOwnerIndex":curr_key
+					  "TaskOwnerIndex":curr_key,
+					  "Date":new Date()
 				},function (data) {
 					console.log(data);
-					$('#div_todo').append("<div id=\"div_task_id_"+data+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+$('#edit_div_content_title').text()+"</div><div class=\"portlet-tag\">"+$('#edit_div_content_tag').text()+"</div><div class=\"portlet-content\">"+$('#edit_div_content_content').text()+"</div></div>");
+					$('#div_todo').append("<div id=\"div_task_id_"+data+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+$('#edit_div_content_title').val()+"</div><div class=\"portlet-tag\">"+$('#edit_div_content_tag').val()+"</div><div class=\"portlet-content\">"+p2div($('#edit_div_content_content').val())+"</div></div>");
 					tasks_set[data] = {
-						  "TaskName":$('#edit_div_content_title').text(),
-						  "TaskDescription":$('#edit_div_content_content').text(),
-						  "Tag":$('#edit_div_content_tag').text(),
-						  "priority":$('#edit_div_content_priority').text()
-
+						  "TaskName":$('#edit_div_content_title').val(),
+						  "TaskDescription":$('#edit_div_content_content').val(),
+						  "Tag":$('#edit_div_content_tag').val(),
+						  "priority":$('#edit_div_content_priority').val()
+						  
 					}
 					$('#div_task_id_'+data).click(
 						  {param:data},
 							function(e){
 							  task_id_to_edit = e.data.param;
-							  $('#edit_div_content_title').text(tasks_set[task_id_to_edit].TaskName);
-							  $('#edit_div_content_content').text(tasks_set[task_id_to_edit].TaskDescription);
-							  $('#edit_div_content_tag').text(tasks_set[task_id_to_edit].tag);
-							  $('#edit_div_content_priority').text(tasks_set[task_id_to_edit].priority);
+							  $('#edit_div_content_title').val(tasks_set[task_id_to_edit].TaskName);
+							  $('#edit_div_content_content').val(tasks_set[task_id_to_edit].TaskDescription);
+							  $('#edit_div_content_tag').val(tasks_set[task_id_to_edit].tag);
+							  $('#edit_div_content_priority').val(tasks_set[task_id_to_edit].priority);
 							  $('#edit_div').show();
 							  $('#edit_div').attr('add_or_edit','edit');
 							}
@@ -72,13 +83,13 @@
 
 			break;
 		case 'edit':
-			tasks_set[task_id_to_edit].TaskName = $('#edit_div_content_title').text();
-			tasks_set[task_id_to_edit].TaskDescription = $('#edit_div_content_content').text();
-			var priority_input_text = $('#edit_div_content_priority').text();
+			tasks_set[task_id_to_edit].TaskName = $('#edit_div_content_title').val();
+			tasks_set[task_id_to_edit].TaskDescription = $('#edit_div_content_content').val();
+			var priority_input_text = $('#edit_div_content_priority').val();
 			tasks_set[task_id_to_edit].priority = (isNaN(parseInt(priority_input_text)))?0:parseInt(priority_input_text);
-			tasks_set[task_id_to_edit].Tag = $('#edit_div_content_tag').text();
+			tasks_set[task_id_to_edit].Tag = $('#edit_div_content_tag').val();
 			$('#div_task_id_'+task_id_to_edit+' .portlet-header').html(tasks_set[task_id_to_edit].TaskName);
-			$('#div_task_id_'+task_id_to_edit+' .portlet-content').html(tasks_set[task_id_to_edit].TaskDescription);
+			$('#div_task_id_'+task_id_to_edit+' .portlet-content').html(p2div(tasks_set[task_id_to_edit].TaskDescription));
 			$('#div_task_id_'+task_id_to_edit+' .portlet-tag').html(tasks_set[task_id_to_edit].Tag);
 			//tasks_set[task_id_to_edit].TaskName = $('#edit_div_content_title').text();
 			//tasks_set[task_id_to_edit].TaskDescription = $('#edit_div_content_content').text();
@@ -94,15 +105,15 @@
 					  "StateID":tasks_set[task_id_to_edit].StateID,
 					  "ProjectID":ProjectID,
 					  "Tag":tasks_set[task_id_to_edit].Tag,
-            "TaskOwnerIndex":"Tasks"
+            "TaskOwnerIndex":curr_key
 				},function (data) {
 
 				}
 			);
-		    $('#edit_div_content_title').text("");
-			$('#edit_div_content_content').text("");
-			$('#edit_div_content_tag').text("");
-			$('#edit_div_content_priority').text("");
+		    $('#edit_div_content_title').val("");
+			$('#edit_div_content_content').val("");
+			$('#edit_div_content_tag').val("");
+			$('#edit_div_content_priority').val("");
 
 			break;
 	}
@@ -151,10 +162,10 @@
 		stop: function(event, ui){
 			var tmp = ui.item.attr('id');
 			var TaskToMoved = $('#'+tmp).attr("id");
-			console.log(TaskToMoved);
+			//console.log(TaskToMoved);
 			var TaskIDToMoved = TaskToMoved.split('_').pop();
 			var DivMovedTo = $('#'+tmp).parent().attr("id");
-			console.log(DivMovedTo);
+			//console.log(DivMovedTo);
 			var StateIDMovedTo;
 
 			switch(DivMovedTo){
@@ -191,7 +202,7 @@
 			);
 
 
-		}
+		}										
        });
 
        $( ".portlet" )
@@ -217,8 +228,7 @@
    		appScrum,{
    			"command":"commandGetTasks",
    			"ProjectID":ProjectID,
-			"TaskOwnerIndex":"Tasks",
-      "Encrypt":private_key_input
+			"TaskOwnerIndex":private_key_input
    		},function (data) {
    			console.log(data);
    			var tasks_set_tmp = data.split('||');
@@ -228,34 +238,41 @@
    				var TaskID = tasks_set_tmp[itask].split('$$')[0];
    				var TaskName = tasks_set_tmp[itask].split('$$')[1];
    				var TaskDescription = tasks_set_tmp[itask].split('$$')[2];
-				console.log(TaskDescription);
+				//console.log(TaskDescription);
    				var priority = tasks_set_tmp[itask].split('$$')[3];
    				var StateID = parseInt(tasks_set_tmp[itask].split('$$')[4]);
 				var Tag = tasks_set_tmp[itask].split('$$')[5];
-				//console.log(Tag);
+				var EstablishDate = tasks_set_tmp[itask].split('$$')[6];
+				//console.log(EstablishDate);
    				tasks_set[TaskID] = {
    					"TaskName":TaskName,
    					"TaskDescription":TaskDescription,
    					"priority":priority,
    					"StateID":StateID,
    					"ProjectID":ProjectID,
-					"Tag":Tag
+					"Tag":Tag,
+					"Date":EstablishDate
    				}
 				//console.log(Tag);
 				//console.log(tasks_set[TaskID].Tag);
    				switch(StateID){
    					case STATETODO:
-
-   						$('#div_todo').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+TaskDescription+"</div></div>");
+						console.log(EstablishDate);
+						var establish_date = new Date(EstablishDate);
+						var curr_date = new Date();
+						var timeDiff = Math.abs(curr_date.getTime() - establish_date.getTime());
+						var diffDays = (timeDiff / (1000 * 3600 * 24)).toFixed(2); 
+						//console.log(diffDays);
+   						$('#div_todo').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"("+ diffDays +"D)</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+p2div(TaskDescription)+"</div></div>");
    						$('#div_task_id_'+TaskID).click(
    						{param:TaskID},
    							function(e){
-
+								
    								task_id_to_edit = e.data.param;
-   								$('#edit_div_content_title').text(tasks_set[e.data.param].TaskName);
-   								$('#edit_div_content_content').text(tasks_set[e.data.param].TaskDescription);
-								$('#edit_div_content_tag').text(tasks_set[e.data.param].Tag);
-   								$('#edit_div_content_priority').text(tasks_set[e.data.param].priority);
+   								$('#edit_div_content_title').val(tasks_set[e.data.param].TaskName);
+   								$('#edit_div_content_content').val(tasks_set[e.data.param].TaskDescription);
+								$('#edit_div_content_tag').val(tasks_set[e.data.param].Tag);
+   								$('#edit_div_content_priority').val(tasks_set[e.data.param].priority);
    								$('#edit_div').show();
    								$('#edit_div').attr('add_or_edit','edit');
    							}
@@ -263,15 +280,15 @@
    						break;
    					case STATEONGOING:
 
-   						$('#div_ongoing').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+TaskDescription+"</div></div>");
+   						$('#div_ongoing').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+p2div(TaskDescription)+"</div></div>");
    						$('#div_task_id_'+TaskID).click(
    							{param:TaskID},
    							function(e){
    								task_id_to_edit = e.data.param;
-   								$('#edit_div_content_title').text(tasks_set[e.data.param].TaskName);
-   								$('#edit_div_content_content').text(tasks_set[e.data.param].TaskDescription);
-								$('#edit_div_content_tag').text(tasks_set[e.data.param].Tag);
-   								$('#edit_div_content_priority').text(tasks_set[e.data.param].priority);
+   								$('#edit_div_content_title').val(tasks_set[e.data.param].TaskName);
+   								$('#edit_div_content_content').val(tasks_set[e.data.param].TaskDescription);
+								$('#edit_div_content_tag').val(tasks_set[e.data.param].Tag);
+   								$('#edit_div_content_priority').val(tasks_set[e.data.param].priority);
    								$('#edit_div').show();
    								$('#edit_div').attr('add_or_edit','edit');
    							}
@@ -279,31 +296,31 @@
    						break;
    					case STATEDONE:
 
-   						$('#div_done').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+TaskDescription+"</div></div>");
+   						$('#div_done').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+p2div(TaskDescription)+"</div></div>");
    						$('#div_task_id_'+TaskID).click(
    						{param:TaskID},
    							function(e){
 
    								task_id_to_edit = e.data.param;
-   								$('#edit_div_content_title').text(tasks_set[e.data.param].TaskName);
-   								$('#edit_div_content_content').text(tasks_set[e.data.param].TaskDescription);
-								$('#edit_div_content_tag').text(tasks_set[e.data.param].Tag);
-   								$('#edit_div_content_priority').text(tasks_set[e.data.param].priority);
+   								$('#edit_div_content_title').val(tasks_set[e.data.param].TaskName);
+   								$('#edit_div_content_content').val(tasks_set[e.data.param].TaskDescription);
+								$('#edit_div_content_tag').val(tasks_set[e.data.param].Tag);
+   								$('#edit_div_content_priority').val(tasks_set[e.data.param].priority);
    								$('#edit_div').show();
    								$('#edit_div').attr('add_or_edit','edit');
    							}
    						);
    						break;
    					case STATEHISTORY:
-   						$('#div_history').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+TaskDescription+"</div></div>");
+   						$('#div_history').append("<div id=\"div_task_id_"+TaskID+"\"class=\"portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\">"+TaskName+"</div><div class=\"portlet-tag\">"+Tag+"</div><div class=\"portlet-content\">"+p2div(TaskDescription)+"</div></div>");
    						$('#div_task_id_'+TaskID).click(
    						{param:TaskID},
    							function(e){
    								task_id_to_edit = e.data.param;
-   								$('#edit_div_content_title').text(tasks_set[e.data.param].TaskName);
-   								$('#edit_div_content_content').text(tasks_set[e.data.param].TaskDescription);
-								$('#edit_div_content_tag').text(tasks_set[e.data.param].Tag);
-   								$('#edit_div_content_priority').text(tasks_set[e.data.param].priority);
+   								$('#edit_div_content_title').val(tasks_set[e.data.param].TaskName);
+   								$('#edit_div_content_content').val(tasks_set[e.data.param].TaskDescription);
+								$('#edit_div_content_tag').val(tasks_set[e.data.param].Tag);
+   								$('#edit_div_content_priority').val(tasks_set[e.data.param].priority);
    								$('#edit_div').show();
    								$('#edit_div').attr('add_or_edit','edit');
    							}
