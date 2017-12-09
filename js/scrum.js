@@ -53,7 +53,8 @@
 					  "Tag":$('#edit_div_content_tag').val(),
 					  "StateID":1,
 					  "ProjectID":ProjectID,
-					  "TaskOwnerIndex":curr_key,
+					  "TaskOwnerIndex":"Tasks",
+					  "Encrypt":(typeof curr_key=="undefined")?"":curr_key,
 					  "Date":new Date()
 				},function (data) {
 					console.log(data);
@@ -105,7 +106,7 @@
 					  "StateID":tasks_set[task_id_to_edit].StateID,
 					  "ProjectID":ProjectID,
 					  "Tag":tasks_set[task_id_to_edit].Tag,
-            "TaskOwnerIndex":curr_key
+					  "TaskOwnerIndex":"Tasks"
 				},function (data) {
 
 				}
@@ -125,7 +126,7 @@
 				appScrum,{
 					  "command":"commandDeleteTask",
 					  "TaskID":task_id_to_edit,
-					  "TaskOwnerIndex":curr_key
+					  "TaskOwnerIndex":"Tasks"
 				},function (data) {
 					$('#div_task_id_'+task_id_to_edit).remove()
 				}
@@ -134,10 +135,9 @@
 
  var TaskToEdit;
 
- //var private_key = "45BCSFDLXJ"
 
  var load = function(private_key_input){
-
+	//console.log(private_key_input);
 
    	$('#div_history').hide();
 
@@ -194,7 +194,7 @@
 					  "Priority":tasks_set[TaskIDToMoved].priority,
 					  "StateID":StateIDMovedTo,
 					  "ProjectID":ProjectID,
-					  "TaskOwnerIndex":private_key_input,
+					  "TaskOwnerIndex":"Tasks",
 					  "Tag": tasks_set[TaskIDToMoved].Tag
 				},function (data) {
 
@@ -228,7 +228,8 @@
    		appScrum,{
    			"command":"commandGetTasks",
    			"ProjectID":ProjectID,
-			"TaskOwnerIndex":private_key_input
+			"TaskOwnerIndex":"Tasks",
+			"Encrypt":private_key_input
    		},function (data) {
    			console.log(data);
    			var tasks_set_tmp = data.split('||');
@@ -372,10 +373,12 @@
        "command":"commandAskPass",
        "ProjectID":ProjectID
      },function (data) {
-          if(data){
-            load(data);
+          
+		  if(data){
+			load(data);
             curr_key = data;
           }else{
+			load(data);
 
           }
      });
