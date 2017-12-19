@@ -98,38 +98,64 @@ body {
     display: block;
   }
 }
-
-ul {
+/*
+#div_navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 12%;
     background-color: #f1f1f1;
     position: fixed;
-    height: 100%;
     overflow: auto;
 	font-size:20px;
 	left:0px;
 	top:0px;
-}
 
-li a {
+}
+#div_navbar li{
+  display:inline;
+}
+#div_navbar li a {
     display: block;
     color: #000;
     padding: 8px 16px;
     text-decoration: none;
+
+
 }
 
-li a.active {
+#div_navbar li a.active {
     background-color: #4CAF50;
     color: white;
 }
 
-li a:hover:not(.active) {
+#div_navbar li a:hover:not(.active) {
     background-color: #555;
     color: white;
 }
+*/
+#div_navbar ul{
+  text-align:center;
+  font-size:20px;
+}
 
+#div_navbar li{
+
+  display:inline;
+}
+#div_navbar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+#div_navbar li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+#div_navbar li a{
+  color:#000;
+  text-decoration:none;
+
+}
 h1{
 	margin-left:20px;
 	font-size:2rem;
@@ -137,7 +163,7 @@ h1{
 
 #ProjectTitle{
 		font-size:20px;
-		text-align:left;
+		text-align:center;
 		font-weight: bold;
 		margin-top:5px;
 		margin-bottom:10px;

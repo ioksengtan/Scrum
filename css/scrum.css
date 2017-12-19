@@ -75,9 +75,9 @@
 
 }
 .password{
-  
-}
 
+}
+/*
 ul {
     list-style-type: none;
     margin: 0;
@@ -111,6 +111,46 @@ h1{
 	margin-left:20px;
 	font-size:2rem;
 }
+*/
+#div_navbar ul{
+  text-align:center;
+  font-size:20px;
+}
+
+#div_navbar li{
+
+  display:inline;
+}
+#div_navbar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+#div_navbar li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+#div_navbar li a{
+  color:#000;
+  text-decoration:none;
+
+}
+h1{
+	margin-left:20px;
+	font-size:2rem;
+}
+
+#ProjectTitle{
+		font-size:20px;
+		text-align:center;
+		font-weight: bold;
+		margin-top:5px;
+		margin-bottom:10px;
+		margin-left:10px;
+    color:white;
+    background-color: black;
+}
+
+
 .column {
 width: 18%;
 float: left;
@@ -144,11 +184,11 @@ border: 1px dotted black;
 margin: 0 1em 1em 0;
 height: 50px;
 }
-  
-  
+
+
   @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-html{    
+html{
   /*background:url(background.jpg) no-repeat;*/
   background-size: cover;
   height:100%;
@@ -307,11 +347,11 @@ input:focus, textarea:focus {
 	background-color: rgba(0,0,0,0);
 	color: #0493bd;
 }
-	
+
 .submit:hover {
 	color: #3498db;
 }
-	
+
 .ease {
 	width: 0px;
 	height: 74px;
