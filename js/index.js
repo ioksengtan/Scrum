@@ -12,7 +12,9 @@ var EditProject = function(ProjectID){
 		$('#edit_div').show();
 }
  var ToAddProject = function(){
-
+	 $('#edit_div_content_title').val("");
+ 	$('#edit_div_content_content').val("");
+ 	$('#edit_div_content_authen').val("");
 
 	 $('#edit_div').show();
 	 $('#edit_div').attr('add_or_edit','add');
